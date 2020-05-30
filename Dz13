@@ -1,0 +1,84 @@
+//создание файла, ввод в него 3 слов и вывод их наоборот 
+#include <stdio.h>
+#include <stdlib.h>
+void create(char *a)
+{
+ FILE *f;
+ f=fopen(a, "w+t");
+ fclose(f);
+}
+void inp(char *a)
+{
+ FILE *f=fopen(a, "a+t");
+ char d[10], b[10], c[10];
+ printf("vvedite slova ");
+ scanf("%s %s %s", d, b, c);
+ fprintf(f, "%s %s %s",d, b,c);
+ fclose(f);
+}
+void read(char *a)
+{
+ char b[10], c[10], d[10];
+ FILE *f=fopen(a, "r");
+ fscanf(f, "%s %s %s",b, c, d);
+ printf("%s %s %s", d, c, b);
+}
+int main()
+{
+ char a[80];
+ printf("Vvedite nazvanie ");
+ scanf("%s", &a);
+ create(a);
+ inp(a);
+ read(a);
+}
+//создать файл из н символов и поменять большие буквы на маленькие и наоборот 
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+void create(char *a)
+{
+ FILE *f;
+ f=fopen(a, "w+t");
+ fclose(f);
+}
+void input(char *a)
+{
+ FILE *f=fopen(a,"a+t");
+ char n;
+ do
+ {
+  scanf("%c", &n);
+  fprintf(f,"%c ",n);
+ }while(n!='.');
+ fclose(f);
+}
+void changeRegister(char *a)
+{
+ FILE *f=fopen(a,"r+t");
+ FILE *f1=fopen("text1.txt", "a+t");
+ while(!feof(f))//пока не закончится файл
+ {
+  char c;
+  fscanf(f, "%c", &c);
+  if(isalpha(c)&&isupper(c))
+  {
+   c=tolower(c); 
+  }
+  else if(islower(c))
+  {
+   c=toupper(c);
+  }
+  fprintf(f1, "%c", c);
+ }
+ fclose(f); fclose(f1);
+}
+int main()
+{
+ char a[80];
+ printf("Vvedite nazvanie ");
+ scanf("%s", &a);
+ create(a);
+ input(a);
+ changeRegister(a);
+}
