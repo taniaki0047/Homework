@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+
+int main() {
+    set <int> N;
+    int n;
+    ifstream i("input.txt");
+    while (i >> n)
+        if (N.count(n) == 0) {
+            cout << "NO\n";
+            N.insert(n);
+        }
+        else
+            cout << "YES\n";
+    return 0;
+    
+#include<cstdlib>
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
+int main()
+{
+    fstream instream;
+    ofstream outstream;
+    instream.open("joy.txt");
+    if(instream.fail())
+    {
+        cout<<"The input file failed to open\n";
+        exit(1);
+    }
+    outstream.open("output.txt");
+    if(outstream.fail())
+    {
+        cout<<"The output file failed to open";
+        exit(1);
+    }
+
+    int next, largest, smallest;
+    largest = 0;
+    smallest = 0;
+
+
+    while(instream>>next)
+    {
+
+        if(largest<next)
+        {
+            largest = next;
+        }else{
+                  smallest = next;
+        }
+    }
+
+    outstream<<"l n: "<<largest<<endl;
+    outstream<<"s n: "<<smallest<<endl;
+    instream.close();
+    outstream.close();
+
+    system("pause");
+    return 0;
