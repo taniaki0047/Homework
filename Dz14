@@ -1,0 +1,39 @@
+//создать из н чисел и найти среднее арифметическое 
+#include <stdio.h>
+void file(char *name)
+{
+ FILE *lst=fopen(name,"w+b");
+ int n, b;
+ printf("vvedite kol-vo chisel ");
+ scanf("%d", &n);
+ for(int i=0;i<n;i++)
+ {
+  printf("element %d= ", i);
+  scanf("%d", &b);
+  fwrite(&b, 1, sizeof(int), lst);
+ }
+ fclose(lst);
+}
+double medium(char *name)
+{
+ int g, s=0, n=0;
+ FILE *lst=fopen(name,"r+b");
+ while(!feof(lst))
+ {
+  int m=fread(&g, sizeof(int),1, lst);
+  if(m==0) break;
+  s+=g; n++;
+ }
+ double avg=(double)s/n;
+ fclose(lst);
+ printf("\n%lf", avg);
+ return 1;
+}
+int main()
+{
+ char name[80];
+ printf("Vvedite nazvanie ");
+ scanf("%s", &name);
+ file(name);
+ medium(name);
+}
